@@ -38,9 +38,9 @@ const generateTaskCard = ({ id, url, title, type, description }) =>
     alt="image"
   />
   <div class="card-body">
-    <h5 class="card-title">${title}</h5>
-    <p class="card-text">${description}</p>
-    <span class="badge bg-primary">${type}</span>
+    <h5 class="card-title" id="tt">${title}</h5>
+    <p class="card-text" id="td">${description}</p>
+    <span class="badge bg-primary" id="th">${type}</span>
   </div>
   <div class="card-footer">
     <button class="btn btn-outline-primary float-end" name=${id} onClick="openTask(this)" data-bs-toggle="modal"
@@ -109,8 +109,6 @@ const editTask = (e) => {
     "true"
   );
 
-  //console.log(e.parentNode.parentNode.parentNode.childNodes[7].childNodes[1]);
-
   e.parentNode.parentNode.parentNode.childNodes[7].childNodes[1].innerHTML =
     "SAVE CHANGES";
 
@@ -118,58 +116,23 @@ const editTask = (e) => {
     "onclick",
     "saveEditTask(this)"
   );
-  e.parentNode.parentNode.parentNode.childNodes[7].childNodes[1].removeAttribute(
-    "data-bs-toggle"
-  );
-  e.parentNode.parentNode.parentNode.childNodes[7].childNodes[1].removeAttribute(
-    "data-bs-target"
-  );
 };
 
 const saveEditTask = (e) => {
-  const targetID = e.getAttribute("name");
-  console.log(e);
+  let targetID = e.getAttribute("name");
 
-  //   console.log(e.parentNode.parentNode.parentNode.childNodes[5].childNodes[1]);
-  //   console.log(e.parentNode.parentNode.parentNode.childNodes[5].childNodes[3]);
-  //   console.log(e.parentNode.parentNode.parentNode.childNodes[5].childNodes[5]);
+  globalTaskData.filter((cardData) => {
+    if (cardData.id === targetID) {
+      cardData.title = document.getElementById("tt").textContent;
+      cardData.heading = document.getElementById("th").textContent;
+      cardData.description = document.getElementById("td").textContent;
+    }
 
-  //   //   const updateData = {
-  //   //     title: document.getElementById("taskTitle").value,
-  //   //     type: document.getElementById("taskType").value,
-  //   //     description: document.getElementById("taskDescription").value,
-  //   //   };
+    return cardData;
+  });
 
-  //   console.log(e.parentNode.parentNode.parentNode.childNodes[5].childNodes[1]);
-
-  //   //   e.parentNode.parentNode.parentNode.childNodes[5].childNodes[1].setAttribute(
-  //   //     "contenteditable",
-  //   //     "false"
-  //   //   );
-  //   //   e.parentNode.parentNode.parentNode.childNodes[5].childNodes[3].setAttribute(
-  //   //     "contenteditable",
-  //   //     "false"
-  //   //   );
-  //   //   e.parentNode.parentNode.parentNode.childNodes[5].childNodes[5].setAttribute(
-  //   //     "contenteditable",
-  //   //     "false"
-  //   //   );
-
-  //   //   e.parentNode.parentNode.parentNode.childNodes[7].childNodes[1].innerHTML =
-  //   //     "OPEN TASK";
-  //   //   e.parentNode.parentNode.parentNode.childNodes[7].childNodes[1].removeAttribute(
-  //   //     "data-bs-toggle",
-  //   //     "modal"
-  //   //   );
-  //   //   e.parentNode.parentNode.parentNode.childNodes[7].childNodes[1].removeAttribute(
-  //   //     "data-bs-target",
-  //   //     "#showTaskModal"
-  //   //   );
-
-  //   //   e.parentNode.parentNode.parentNode.childNodes[7].childNodes[1].setAttribute(
-  //   //     "onClick",
-  //   //     "openTask(this)"
-  //   //   );
+  saveToLocalStorage();
+  window.location.reload();
 };
 
 const openTask = (e) => {

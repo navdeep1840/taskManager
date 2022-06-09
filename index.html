@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- CSS only -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link href="style.css" rel="stylesheet" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task Manager</title>
+  </head>
+  <body onload="reloadTaskCard()">
+    <div
+      class="modal fade"
+      id="newCardModal"
+      tabindex="-1"
+      aria-labelledby="newCardModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Add New Task</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="imgURl" class="form-label">Image Url</label>
+              <input
+                type="url"
+                class="form-control"
+                id="imgURL"
+                placeholder="www.example.com/image.jpg"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="taskTitle" class="form-label">Task Title</label>
+              <input
+                type="text"
+                class="form-control"
+                id="taskTitle"
+                placeholder="Title"
+              />
+            </div>
+
+            <div class="mb-3">
+              <label for="taskType" class="form-label">Task Type</label>
+              <input
+                type="text"
+                class="form-control"
+                id="taskType"
+                placeholder="Type"
+              />
+            </div>
+
+            <div class="mb-3">
+              <label for="taskDescription" class="form-label"
+                >Task-Description</label
+              >
+              <textarea
+                rows="3"
+                class="form-control"
+                id="taskDescription"
+                placeholder="Description"
+              ></textarea>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              onclick="addCard()"
+              type="button"
+              class="btn btn-primary"
+              data-bs-dismiss="modal"
+            >
+              SAVE
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- show task modal -->
+    <div
+      class="modal fade"
+      id="showTaskModal"
+      tabindex="-1"
+      aria-labelledby="showTaskLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-body" id="taskModal"></div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a href="#" class="navbar-brand">Tasky</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" href="#">Home</a>
+            </li>
+          </ul>
+          <button
+            class="btn btn-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#newCardModal"
+          >
+            <i class="fa fa-plus"></i>
+            ADD NEW
+          </button>
+        </div>
+      </div>
+    </nav>
+    <!-- search bar -->
+    <main class="container">
+      <section class="mt-4">
+        <div class="row justify-content-center">
+          <div class="col-md-6">
+            <div class="input-group flex-nowrap shadow-lg">
+              <input
+                type="search"
+                class="form-control"
+                id="searchTask"
+                placeholder="Search Task"
+                aria-label="Search Task"
+                aria-describedby="addon-wrapping"
+                onkeyup="searchTask(this)"
+              /><span class="input-group-text" id="addon-wrapping">
+                <i class="fa fa-search"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section>
+        <div class="row" id="taskContentsrow"></div>
+      </section>
+    </main>
+
+    <script src="index.js"></script>
+    <!-- JavaScript Bundle with Popper -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

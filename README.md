@@ -1,8 +1,7 @@
 # taskManger
 
-A basic Task Mangager made using HTML,CSS and JAVASCRIPT
+A basic Task Mangager made using HTML,CSS and JAVASCRIPT , you can
 
-You can 
           -ADD TASKS
           -DELETE TASKS
           -UPDATE TASKS
